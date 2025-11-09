@@ -1,0 +1,13 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.tmp
+
+# Build
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
