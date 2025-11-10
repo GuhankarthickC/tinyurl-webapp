@@ -1,0 +1,37 @@
+<div class="tiny-url">
+  <h1 class="title">Tiny URL</h1>
+
+  <div class="panel">
+    <form [formGroup]="urlForm" (ngSubmit)="shorten()">
+      <div class="top-row">
+        <input 
+          class="url-input" 
+          formControlName="longUrl"
+          type="url" 
+          placeholder="Enter URL to shorten" 
+        />
+        
+        <label class="checkbox-container">
+          <input 
+            type="checkbox" 
+            class="checkbox-input" 
+            formControlName="isPrivate"
+          />
+          <span class="checkbox-label">IsPrivate</span>
+        </label>
+      </div>
+
+      <button class="cta" type="submit" [disabled]="urlForm.invalid">Generate</button>
+    </form>
+  </div>
+
+    <div *ngIf="shortUrl" class="result-container">
+      <p class="short-url-text">
+        <strong>Short URL: </strong>
+        <a [href]="shortUrl" target="_blank">{{ shortUrl }}</a>
+      </p>
+      <button class="copy-btn" type="button" (click)="copyToClipboard()">
+        {{ copied ? 'Copied!' : 'Copy' }}
+      </button>
+    </div>
+</div>
