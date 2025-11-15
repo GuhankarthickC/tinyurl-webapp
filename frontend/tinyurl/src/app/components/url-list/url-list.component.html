@@ -1,0 +1,44 @@
+<div class="url-list-container">
+  <h2 class="list-title">Public URLs</h2>
+
+  <div class="search-box">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search URLs..." 
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+    />
+  </div>
+
+  <div class="url-items-wrapper">
+    <div class="url-items">
+      <div *ngFor="let url of filteredUrls" class="url-card">
+        <div class="url-content">
+          <div class="url-info">
+            <div class="url-top-row">
+              <a [href]="url.shortURL" target="_blank" class="short-url">
+                {{ url.shortURL }}
+              </a>
+              <button class="copy-btn" type="button" (click)="copyToClipboard(url.shortURL, url.code)">
+                {{ copiedCode === url.code ? 'Copied!' : 'Copy' }}
+              </button>
+              <span class="clicks-text">{{ url.totalClicks }} clicks</span>
+            </div>
+            <div class="original-url">{{ url.originalURL }}</div>
+          </div>
+
+          <div class="url-actions">
+            <button class="delete-btn" (click)="deleteUrl(url.code)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredUrls.length === 0" class="no-results">
+        No URLs found
+      </div>
+    </div>
+  </div>
+</div>

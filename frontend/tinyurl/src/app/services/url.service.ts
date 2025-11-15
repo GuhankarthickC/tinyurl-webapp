@@ -15,4 +15,12 @@ export class UrlService {
   shorten(originalURL: string, isPrivate: boolean): Observable<any> {
     return this.http.post(`${this.api}/add`, { originalURL, isPrivate });
   }
+
+  getPublicUrls(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.api}/public`);
+  }
+
+  deleteUrl(code: string): Observable<any> {
+    return this.http.delete(`${this.api}/delete/${code}`);
+  }
 }

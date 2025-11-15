@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UrlService } from '../../services/url.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './url-form.component.scss'
 })
 export class UrlFormComponent {
+  @Output() urlCreated = new EventEmitter<void>();
   urlForm: FormGroup;
   shortUrl: string = '';
   copied: boolean = false;
@@ -30,6 +31,10 @@ export class UrlFormComponent {
     this.urlService.shorten(longUrl, isPrivate).subscribe({
       next: (res: any) => {
         this.shortUrl = res.shortUrl;
+        this.urlForm.patchValue({ longUrl: '' });
+        if (!isPrivate) {
+          this.urlCreated.emit();
+        }
       },
       error: (err) => {
         alert('Error: ' + err.error);
