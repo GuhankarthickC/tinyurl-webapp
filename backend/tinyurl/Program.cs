@@ -95,8 +95,14 @@ app.MapGet("/api/public", async (AppDbContext db) =>
 .WithTags("Urls")
 .Produces<List<TinyUrl>>(200);
 
-app.MapDelete("/api/delete/{code}", async (AppDbContext db, string code) =>
+app.MapDelete("/api/delete/{code}", async (AppDbContext db, HttpContext context, string code) =>
 {
+    var token = context.Request.Headers["X-Secret-Token"].FirstOrDefault();
+    var configToken = context.RequestServices.GetRequiredService<IConfiguration>()["secretToken"];
+
+    if (token != configToken)
+        return Results.Unauthorized();
+
     var url = await db.ShortUrls.FirstOrDefaultAsync(u => u.ShortCode == code);
     
     if (url == null)
