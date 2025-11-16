@@ -1,0 +1,18 @@
+# Copy this file to terraform.tfvars and fill in your values
+# terraform.tfvars should be in .gitignore for security
+
+subscription_id      = "your-azure-subscription-id"
+resource_group_name  = "tinyurl-rg"
+location             = "centralindia"
+environment          = "prod"
+sql_admin_username   = "sqladmin"
+sql_admin_password   = "YourStrongPassword123!"
+app_service_sku      = "B1"
+function_app_sku     = "Y1"
+sql_database_name    = "TinyUrlDb"
+
+tags = {
+  Project     = "TinyURL"
+  ManagedBy   = "Terraform"
+  Environment = "Production"
+}
