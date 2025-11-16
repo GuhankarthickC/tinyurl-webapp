@@ -21,6 +21,7 @@ export class UrlService {
   }
 
   deleteUrl(code: string): Observable<any> {
-    return this.http.delete(`${this.api}/delete/${code}`);
+    const headers = { 'X-Secret-Token': environment.secretToken };
+    return this.http.delete(`${this.api}/delete/${code}`, { headers });
   }
 }
