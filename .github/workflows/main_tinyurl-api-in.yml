@@ -28,8 +28,8 @@ jobs:
         working-directory: ./backend/tinyurl
 
       - name: dotnet publish
-        run: dotnet publish -c Release
-        working-directory: ./backend/tinyurl -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: ./backend/tinyurl
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -64,4 +64,3 @@ jobs:
           app-name: 'tinyurl-api-in'
           slot-name: 'Production'
           package: .
-          
