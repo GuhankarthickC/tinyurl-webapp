@@ -25,6 +25,12 @@ jobs:
         with:
           submodules: true
           lfs: false
+      
+      - name: Replace environment variables
+        run: |
+          sed -i 's/${SECRET_TOKEN}/'${{ secrets.SECRET_TOKEN }}'/g' frontend/tinyurl/src/environments/environment.prod.ts
+        shell: bash
+      
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

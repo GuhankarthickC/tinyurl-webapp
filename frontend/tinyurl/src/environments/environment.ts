@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://tinyurl-api-in.azurewebsites.net/api'
+  apiUrl: 'https://tinyurl-api-in.azurewebsites.net/api',
+  secretToken: '${SECRET_TOKEN}'
 };
