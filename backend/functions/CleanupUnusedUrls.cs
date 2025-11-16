@@ -17,9 +17,9 @@ namespace TinyUrlCleanup
         }
 
         [Function("CleanupUnusedUrls")]
-        public async Task Run([TimerTrigger("0 */1 * * *")] TimerInfo myTimer)
+        public async Task Run([TimerTrigger("0 0 * * * *")] TimerInfo myTimer)
         {
-            _logger.LogInformation($"Cleanup function executed at: {DateTime.Now}");
+            _logger.LogInformation($"Cleanup function executed at: {DateTime.UtcNow}");
 
             var cutoff = DateTime.UtcNow.AddHours(-24);
 

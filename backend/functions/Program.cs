@@ -9,8 +9,9 @@ var builder = FunctionsApplication.CreateBuilder(args);
 
 builder.ConfigureFunctionsWebApplication();
 
-// Register DbContext
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+// Register DbContext with connection string
+var connectionString = Environment.GetEnvironmentVariable("DefaultConnection") 
+    ?? "Server=localhost;Database=placeholder;";
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
